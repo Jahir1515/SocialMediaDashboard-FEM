@@ -9,7 +9,7 @@ const terser = require("gulp-terser");
 const browsersync = require("browser-sync").create();
 
 // Sass Task
-function scssTask() {
+async function scssTask() {
   return src("app/scss/style.scss", { sourcemaps: true })
     .pipe(sass())
     .pipe(postcss([autoprefixer(), cssnano()]))
@@ -17,7 +17,7 @@ function scssTask() {
 }
 
 // JavaScript Task
-function jsTask() {
+async function jsTask() {
   return src("app/js/script.js", { sourcemaps: true })
     .pipe(babel({ presets: ["@babel/preset-env"] }))
     .pipe(terser())
@@ -25,7 +25,7 @@ function jsTask() {
 }
 
 // Browsersync
-function browserSyncServe(cb) {
+async function browserSyncServe(cb) {
   browsersync.init({
     server: {
       baseDir: ".",
@@ -39,13 +39,13 @@ function browserSyncServe(cb) {
   });
   cb();
 }
-function browserSyncReload(cb) {
+async function browserSyncReload(cb) {
   browsersync.reload();
   cb();
 }
 
 // Watch Task
-function watchTask() {
+async function watchTask() {
   watch("*.html", browserSyncReload);
   watch(
     ["app/scss/**/*.scss", "app/**/*.js"],

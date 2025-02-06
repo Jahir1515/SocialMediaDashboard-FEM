@@ -1,2 +1,8 @@
-@use 'globals';
-@use 'components';
+@use "globals" as *;
+
+@use "components/index.scss";
+@use "components/card.scss";
+@use "components/card-grid.scss";
+@use "components/header.scss";
+@use "components/toggle.scss";
+
